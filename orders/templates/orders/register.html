@@ -5,15 +5,10 @@ Login
 {% endblock %}
 
 {% block body %}
-<h2>Login</h2>
-{% if message %}
-<div>
-    {{menssage}}
-</div>
-{% endif %}
+
 <div class="container text-center">
-    <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
+    <form action="{% url 'register' %}" class="form" method="post">
+    {% csrf_token %}
         <label for="username">Username</label>
         <input type="username" name="username" class="form-control">
     

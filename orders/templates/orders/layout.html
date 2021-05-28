@@ -17,7 +17,7 @@
 <body>
 <!--bar navigator bootstrap-->
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="{% url 'index' %}"><img src="http://www.pinocchiospizza.net/images/pinocchio_72.gif" alt="pizza" height="50em">  Pinocchio's Pizza & Subs</a>
+    <a class="navbar-brand" href="{% url 'index' %}"><img src="http://www.pinocchiospizza.net/images/pinocchio_72.gif" alt="pizza" height="100em"><b class="title">Pinocchio's Pizza & Subs</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,13 +26,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             {% if user.username %}
-            <li class="nav-item active"><a class="nav-link" href="">Menu</a></li>
-            <li class="nav-item active"><a class="nav-link" href="">Directions</a></li>
-            <li class="nav-item active"><a class="nav-link" href="">Hours</a></li>
-            <li class="nav-item active"><a class="nav-link" href="">Silician vs Regular</a></li>
-            <li class="nav-item active"><a class="nav-link" href="">Contact Us</a></li>
-            <li class="nav-item active"><a class="nav-link" href="">Cart</a></li>
-            <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}"><span>Logout</span> </a></li>
+            <li class="nav-item active"><a class="nav-link" href=""><span><b>Menu</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href=""><span><b>Directions</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href=""><span><b>Hours</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href=""><span><b>Silician vs Regular</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href=""><span><b>Contact Us</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href=""><span><b>Cart</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}"><span><b>Logout</b></span> </a></li>
 
             {% else %}
             <li class="nav-item active">
@@ -45,8 +45,26 @@
         </ul>
     </div>
 </nav>
+{% if message_success %}
+<div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+    {{message_success}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+
+{% if message_alert %}
+<div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+    {{message_alert}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
 <h1 class="text-center">Pinocchio's Pizza & Subs</h1>
 {% block body %}{% endblock %}
+
 
 <!--BS JS-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

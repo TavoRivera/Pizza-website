@@ -11,28 +11,16 @@ from django.contrib import messages
 def index(request):
     # verifica si el usuario está logueado
     if not request.user.is_authenticated:
-        return render(request, "orders/login.html", {"menssage": None})
+        return render(request, "orders/login.html", {"menssage_alert": "Invalid Username"})
     context = {
         "user": request.user
     }
     return render(request, "orders/index.html")
 
-# def login_view(request):
-#     username = request.POST["username"]
-#     password = request.POST["password"]
-
-#     user = authenticate(request, username=username, password=password)
-
-#     if user is not None:
-#         login(request, user)
-#         return HttpResponseRedirect(reverse("index"))
-#     else:
-#         return render(request, "orders/login.html", {"message":"invalid credentials"})
-
 
 def logout_view(request):
     logout(request)
-    return render(request, "orders/login.html", {"message": "Logged out"})
+    return render(request, "orders/login.html", {"message_success": "You Logged out"})
 
 # crea un nuevo usuario
 
@@ -48,32 +36,21 @@ def register(request):
         email = request.POST["email"]
 
     except KeyError:
-        messages.add_message(request, messages.ERROR, 'Invalid Entry')
-        return HttpResponseRedirect(reverse('register'))
+        return render(request, "orders/register.html", {"message_alert": "Invalid Entry"})
     if not username:
-        messages.add_message(request, messages.ERROR, 'Invalid Username')
-        return HttpResponseRedirect(reverse('register'))
+        return render(request, "orders/register.html", {"message_alert": "Invalid Username"})
     if not password:
-        messages.add_message(request, messages.ERROR, 'Invalid password')
-        return HttpResponseRedirect(reverse('register'))
+        return render(request, "orders/register.html", {"message_alert": "Invalid Password"})
 
     check_user = User.objects.filter(username=username)
     if check_user:
-        messages.add_message(request, messages.ERROR,
-                             'Username already exists, try something else')
-        return HttpResponseRedirect(reverse('register'))
+        return render(request, "orders/register.html", {"message_alert": "Username already exists, try something else"})
     if User.objects.filter(email=email).exists():
-        messages.add_message(request, messages.ERROR,
-                             'email already exists, try something else')
-        return HttpResponseRedirect(reverse('register'))
+        return render(request, "orders/register.html", {"message_alert": "email already exists, try something else"})
     if len(first_name) < 2:
-        messages.add_message(request, messages.ERROR,
-                             'First Name must be greater than 2 char')
-        return HttpResponseRedirect(reverse('register'))
+        return render(request, "orders/register.html", {"message_alert": "First Name must be greater than 2 char"})
     if len(last_name) < 2:
-        messages.add_message(request, messages.ERROR,
-                             'Last Name must be greater than 2 char')
-        return HttpResponseRedirect(reverse('register'))
+        return render(request, "orders/register.html", {"message_alert": "Last Name must be greater than 2 char"})
 
     user = User.objects.create_user(
         username=username, first_name=first_name, last_name=last_name, email=email, password=password)
@@ -82,9 +59,7 @@ def register(request):
 
     # cart = Cart(user=request.user)
     # cart.save()
-    messages.add_message(request, messages.SUCCESS,
-                         'Registeration successful!')
-    return HttpResponseRedirect(reverse('index'))
+    return render(request, "orders/index.html", {"message_success": "Registration Successfull!"})
 
 
 def login_view(request):
@@ -95,20 +70,15 @@ def login_view(request):
         password = request.POST['password']
 
     except KeyError:
-        messages.add_message(request, messages.ERROR, 'Invalid Entry')
-        return HttpResponseRedirect(reverse('login'))
+        return render(request, "orders/login.html", {"message_alert": "Invalid Entry"})
     if not username:
-        messages.add_message(request, messages.ERROR, 'Invalid Username')
-        return HttpResponseRedirect(reverse('login'))
+        return render(request, "orders/login.html", {"message_alert": "Invalid Username"})
     if not password:
-        messages.add_message(request, messages.ERROR, 'Invalid password')
-        return HttpResponseRedirect(reverse('login'))
+        return render(request, "orders/login.html", {"message_alert": "Invalid Password"})
 
     user = authenticate(request, username=username, password=password)
     if not user:
-        return render(request, 'orders/login.html', {'errmsg': 'Invalid credentials'})
+        return render(request, 'orders/login.html', {'message_alert': 'Invalid credentials'})
     else:
         login(request, user)
-        messages.add_message(request, messages.SUCCESS,
-                             'Logged in successfully')
-        return HttpResponseRedirect(reverse('index'))
+        return render(request, "orders/index.html", {"message_success": "Welcome!"})

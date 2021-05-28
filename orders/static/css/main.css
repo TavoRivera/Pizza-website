@@ -6,12 +6,51 @@ nav {
 	position: relative;
 }
 
+.title {
+	background: #1e9600; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to right,
+		#ff0000,
+		#fff200,
+		#1e9600
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#ff0000,
+		#fff200,
+		#1e9600
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+	font-size: 20px;
+	font-style: italic;
+	border-radius: 15px;
+	padding: 5px;
+}
+
+.title:hover {
+	background: #fdc830; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to right,
+		#f37335,
+		#fdc830
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to right,
+		#f37335,
+		#fdc830
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+img:hover {
+	height: 110px;
+}
+
 a > span {
-	color: white;
+	color: rgb(38, 248, 98);
+	font-size: 18px;
 }
 
 a > span:hover {
-	color: #ee9794;
+	color: #f72828;
 }
 
 @media screen and (max-width: 490px) {
@@ -48,7 +87,7 @@ footer {
 .redes-container ul li a {
 	display: block;
 	padding: 0 10px;
-	background: #610c31;
+	background: #bb1082;
 	color: white;
 	line-height: 30px;
 	border-radius: 10px;

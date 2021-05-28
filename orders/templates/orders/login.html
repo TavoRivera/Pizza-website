@@ -6,16 +6,13 @@ Login
 
 {% block body %}
 <h2 class="text-center">Login</h2>
-{% if message %}
-<div>
-    {{menssage}}
-</div>
-{% endif %}
 <div class="container text-center">
-    <form action="{% url 'login' %}" method="POST">
+    <form action="{% url 'login' %}" class="form" method="POST">
         {% csrf_token %}
-        <input name="username" type="text">
-        <input name="password" type="password">
+        <label for="username">Username</label>
+        <input name="username" class="form-control" type="text">
+        <label for="password">Password</label>
+        <input name="password" class="form-control" type="password">
         <input type="submit" value="Login">
     </form>
 </div>
