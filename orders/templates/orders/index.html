@@ -7,9 +7,38 @@ Home
 {% block body %}
 <div class="container text-center">
     <h2> Hello {{ user.first_name}} Welcome to the best pizza</h2>
-    <ul>
-        ¿Ya sabes que ordenar?
-    </ul>
+    <section id="menu">
+        {%csrf_token%}
+        {% for item_cat in types %}
+        <h3 style="text-align: center;"><strong>{{item_cat.type}}</strong></h3>
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for items in inventory %}
+            {% if items.item_type == item_cat %}
+            <div class="col-md-6 col-lg-4 col-sm-12 col-xs-12 mt-4">
+                <div class="card">{% load static %}
+                    <img src="https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2017/04/pizzapepperoni0.jpg" class="card-img-top" height="70%" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><small><b>{{ items.name }}</b></small></h5>
+                        {% if items.comments %}
+                        <i class="fa fa-info-circle" style="cursor: pointer;" data-toggle="tooltip" data-placement="top"
+                            title="{{items.comments}}"></i>
+            
+                        {% endif %}
+                        <a href="#" data-toggle="modal" data-target="#modal{{ items.id }}" aria-expanded="true"
+                            aria-controls="collapseOne" class="btn btn-dark">Select</a>
+                        {% if items.special %} <div class="ribbon-wrapper-green">
+                            <div class="ribbon-green">DEAL</div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+                {%endif%}
+            {% endfor %}
+        </div><hr>
+        {% endfor %}
+        
+    </section>
 </div>
 
 {% endblock %}

@@ -17,20 +17,20 @@
 <body>
 <!--bar navigator bootstrap-->
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="{% url 'index' %}"><img src="http://www.pinocchiospizza.net/images/pinocchio_72.gif" alt="pizza" height="100em"><b class="title">Pinocchio's Pizza & Subs</b></a>
+    <a class="navbar-brand" href="{% url 'index' %}"><img src="http://www.pinocchiospizza.net/images/pinocchio_72.gif" alt="pizza" height="80px"><b class="title">Pinocchio's Pizza & Subs</b></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto lista">
             {% if user.username %}
             <li class="nav-item active"><a class="nav-link" href=""><span><b>Menu</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href=""><span><b>Directions</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href=""><span><b>Hours</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href=""><span><b>Silician vs Regular</b></span></a></li>
-            <li class="nav-item active"><a class="nav-link" href=""><span><b>Contact Us</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href="#contact"><span><b>Contact Us</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href=""><span><b>Cart</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}"><span><b>Logout</b></span> </a></li>
 
@@ -79,7 +79,7 @@
         <h6 class=footer-content> CS50W - All Rigths Reserved © 2021</h6>
         <p>Contact Us</p>
     </div>
-    <div class="redes-container">
+    <div class="redes-container" id="contact">
         <div class="row">
             <ul class="col-12">
                 <li><a href="https://twitter.com/PinocchiosPizz" class="twitter"><i

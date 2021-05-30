@@ -40,17 +40,23 @@ nav {
 		#fdc830
 	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-img:hover {
-	height: 110px;
+@media screen and (max-width: 500px) {
+	.title {
+		font-size: 10px;
+	}
 }
 
 a > span {
-	color: rgb(38, 248, 98);
+	color: rgb(255, 255, 255);
 	font-size: 18px;
 }
 
 a > span:hover {
-	color: #f72828;
+	color: #59d041;
+}
+.lista {
+	padding: 10px;
+	background-color: rgba(68, 67, 51, 0.364);
 }
 
 @media screen and (max-width: 490px) {
@@ -59,17 +65,7 @@ a > span:hover {
 	}
 }
 footer {
-	background: #f12711; /* fallback for old browsers */
-	background: -webkit-linear-gradient(
-		to right,
-		#f5af19,
-		#f12711
-	); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(
-		to right,
-		#f5af19,
-		#f12711
-	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: orange;
 }
 
 .redes-container {

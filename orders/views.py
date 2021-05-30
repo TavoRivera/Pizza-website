@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .models import *
 
 # Create your views here.
 
@@ -12,10 +13,12 @@ def index(request):
     # verifica si el usuario está logueado
     if not request.user.is_authenticated:
         return render(request, "orders/login.html", {"menssage_alert": "Invalid Username"})
+    # retornamos nuestro menú
     context = {
-        "user": request.user
+        'types': Type.objects.all(),
+        'inventory': Inventory.objects.all()
     }
-    return render(request, "orders/index.html")
+    return render(request, "orders/index.html", context)
 
 
 def logout_view(request):
@@ -59,7 +62,8 @@ def register(request):
 
     # cart = Cart(user=request.user)
     # cart.save()
-    return render(request, "orders/index.html", {"message_success": "Registration Successfull!"})
+    # return render(request, "orders/index.html", {"message_success": "Registration Successfull!"})
+    return HttpResponseRedirect(reverse('index'))
 
 
 def login_view(request):
@@ -81,4 +85,5 @@ def login_view(request):
         return render(request, 'orders/login.html', {'message_alert': 'Invalid credentials'})
     else:
         login(request, user)
-        return render(request, "orders/index.html", {"message_success": "Welcome!"})
+        # render(request, "orders/index.html", {"message_success": "Welcome!"})
+        return HttpResponseRedirect(reverse('index'))
