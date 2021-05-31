@@ -34,6 +34,7 @@ class Topping(models.Model):
 
 class Inventory(models.Model):
     name = models.CharField(max_length=64)
+    image = models.ImageField(upload_to="image_inventory", blank=True)
     toppings = models.ManyToManyField(
         Topping, blank=True, related_name="toppings")
     special = models.BooleanField(default=False)

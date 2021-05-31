@@ -16,7 +16,10 @@ def index(request):
     # retornamos nuestro menú
     context = {
         'types': Type.objects.all(),
-        'inventory': Inventory.objects.all()
+        'inventory': Inventory.objects.all(),
+        'size':  Size.objects.all(),
+        'topping': Topping.objects.all()
+
     }
     return render(request, "orders/index.html", context)
 
@@ -87,3 +90,11 @@ def login_view(request):
         login(request, user)
         # render(request, "orders/index.html", {"message_success": "Welcome!"})
         return HttpResponseRedirect(reverse('index'))
+
+
+def cart(request):
+    return render(request, 'orders/cart.html')
+
+
+def my_orders(request):
+    return render(request, 'orders/orders.html')
