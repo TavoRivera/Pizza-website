@@ -130,3 +130,57 @@ footer {
 	margin: auto;
 	text-align: center;
 }
+
+.checkboxes {
+	text-align: center;
+}
+
+.checkboxes input {
+	margin: 0px 0px 0px 0px;
+}
+
+.checkboxes label {
+	margin: 0px 20px 0px 3px;
+}
+.ribbon-wrapper-green {
+	width: 85px;
+	height: 88px;
+	overflow: hidden;
+	position: absolute;
+	top: -3px;
+	right: -3px;
+}
+td {
+	padding: 10px;
+}
+th {
+	padding: 10px;
+}
+.ribbon-green {
+	font: bold 15px Sans-Serif;
+	color: #333;
+	text-align: center;
+	text-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
+	transform: rotate(45deg);
+	position: relative;
+	padding: 7px 0;
+	left: -5px;
+	top: 15px;
+	width: 120px;
+	background-color: red;
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(red),
+		to(rgb(255, 52, 52))
+	);
+	background-image: -webkit-linear-gradient(top, red, rgb(255, 52, 52));
+	background-image: -moz-linear-gradient(top, red, rgb(255, 52, 52));
+	background-image: -ms-linear-gradient(top, red, rgb(255, 52, 52));
+	background-image: -o-linear-gradient(top, red, rgb(255, 52, 52));
+	color: black;
+	-webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
