@@ -92,11 +92,17 @@ def add_to_cart(request):
         to_cart.amount = price
 
         to_cart.save()
-        # next = request.POST.get('next', '/')
-        # return HttpResponseRedirect(next)
-        return render(request, "orders/cart.html")
+        messages.success(request, f'Item: {to_cart} added!')
+        return HttpResponseRedirect(reverse('index'))
     else:
         return render(request, "orders/index.html")
+
+
+def cart(request):
+    context = {
+        'row':  Orderr.objects.filter(user_id=request.user.id)
+    }
+    return render(request, 'orders/cart.html', context)
 
 
 def logout_view(request):
@@ -138,9 +144,8 @@ def register(request):
     user.save()
     login(request, user)
 
-    cart = Orderr(user=request.user)
-    cart.save()
-    # return render(request, "orders/index.html", {"message_success": "Registration Successfull!"})
+ 
+    messages.success(request, f" Now you're registered!")
     return HttpResponseRedirect(reverse('index'))
 
 
@@ -165,10 +170,6 @@ def login_view(request):
         login(request, user)
         # render(request, "orders/index.html", {"message_success": "Welcome!"})
         return HttpResponseRedirect(reverse('index'))
-
-
-def cart(request):
-    return render(request, 'orders/cart.html')
 
 
 def my_orders(request):

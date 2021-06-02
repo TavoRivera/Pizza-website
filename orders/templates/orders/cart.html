@@ -5,6 +5,7 @@ Cart
 {% endblock %}
 
 {% block body %}
-<h2 class="text-center">My Cart</h2>
+<h2 class="text-center">My {{request.user}}'s Cart</h2>
+<div>{{row}}</div>
 
 {% endblock %}

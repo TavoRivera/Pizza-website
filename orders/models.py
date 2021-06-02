@@ -43,7 +43,7 @@ class Inventory(models.Model):
     comments = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
-        return f" {self.name} - comentario: {self.comments}"
+        return f" {self.name}"
 
 
 # precio de compra
@@ -56,7 +56,7 @@ class ItemCost(models.Model):
 
     def __str__(self):
         for each in self.itemcost.all():
-            return f"{self.size} {each} {self.amount}"
+            return f"{self.size} {each} ${self.amount}"
 
 
 class ToppingCount(models.Model):
@@ -103,4 +103,10 @@ class Orderr(models.Model):
 
     def __str__(self):
         for each in self.item.all():
-            return f"{each} {self.amount} {self.item_topping.all()}"
+            t=[]
+            for topp in self.item_topping.all():
+                t.append(topp)
+            if len(t) == 0: 
+                return f"{each} - Total price: ${self.amount}"  
+            else:
+                return f"{each} - Total price: ${self.amount} - {t}"
