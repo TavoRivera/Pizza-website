@@ -6,6 +6,11 @@ Cart
 
 {% block body %}
 <h2 class="text-center">My {{request.user}}'s Cart</h2>
-<div>{{row}}</div>
+
+<ul>
+    <li>{{orders}}</li>
+</ul>
+{{total}}
+</div>
 
 {% endblock %}

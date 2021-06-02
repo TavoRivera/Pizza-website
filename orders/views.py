@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib import messages
+from decimal import Decimal
 from .models import *
 
 # Create your views here.
@@ -92,15 +93,30 @@ def add_to_cart(request):
         to_cart.amount = price
 
         to_cart.save()
-        messages.success(request, f'Item: {to_cart} added!')
+        messages.success(request, f'Item: {to_cart} added to cart!')
         return HttpResponseRedirect(reverse('index'))
     else:
         return render(request, "orders/index.html")
 
 
 def cart(request):
+    orders =  Orderr.objects.filter(user_id=request.user.id)
+    total = Decimal(0)
+    cart_item_count = 0
+        
+    total_id = []
+    for order in orders:
+        if order.status == 'Initiated':
+            total_id.append(order.id)
+            cart_item_count = len(total_id)
+            total += Decimal(order.amount)
     context = {
-        'row':  Orderr.objects.filter(user_id=request.user.id)
+        "inventory": Inventory.objects.all(),
+        "itemcost": ItemCost.objects.all(),
+        "orders": orders,
+        "total": total,
+        "total_id": total_id,
+        "cart_item_count": cart_item_count
     }
     return render(request, 'orders/cart.html', context)
 
