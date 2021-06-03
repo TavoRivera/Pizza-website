@@ -5,12 +5,11 @@ Cart
 {% endblock %}
 
 {% block body %}
-<h2 class="text-center">My {{request.user}}'s Cart</h2>
 
-
-<div class="card">
+<div class="card mt-5">
     <div class="card-header">
-        Shopping Cart <i class="fa fa-shopping-cart" style="font-size:20px;color:#000"></i>
+        <div class="dropdown-divider title"></div>
+        <h2 class="text-center">My {{request.user}}'s Cart &#128722; </h2>
     </div>
     {% if cart_item_count > 0 %}
     <div class="card-body">
@@ -22,7 +21,7 @@ Cart
                     <thead>
                         <tr>
                             <th scope="col">Item</th>
-                            <th scope="col">Qty</th>
+                            <th scope="col">Quantity</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Delete</th>
                         </tr>
@@ -37,12 +36,10 @@ Cart
                             <td>{{order.qty}}</td>
                             <td>${{order.amount}}</td>
                             <td>
-                                <form action="#" method="POST">
+                                <form action="{% url 'delete_item' %}" method="POST">
                                     {% csrf_token %}
-                                    <input type="hidden" name="next" value="{{ request.path }}">
                                     <input type="hidden" name="item_id" value="{{order.id}}"><button type="submit"
-                                        class="btn"><i class="fa
-                                      fa-trash"></i></button>
+                                        class="btn"><i class="bi bi-cart-dash"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -55,7 +52,7 @@ Cart
                         <tr>
                             <td></td>
                             <td colspan="2">
-                                <hr> <b>Total</b>: ${{ total }}
+                                <hr> <b style="font-size:large;">Total: ${{ total }}</b>
                             </td>
                             <td></td>
                         </tr>
@@ -69,8 +66,8 @@ Cart
             <hr>
 
             <span class="float-right">
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#checkout">
-                    Checkout
+                <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#checkout">
+                    Generate Order 🤑
                 </button>
 
                 <div class="modal fade" id="checkout" tabindex="-1" role="dialog"
@@ -78,7 +75,7 @@ Cart
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Confirm Cart Items</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Confirm Order 💸</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -88,10 +85,10 @@ Cart
                                     <table>
 
                                         <th>Item</th>
-                                        <th>Qty</th>
+                                        <th>Quantity</th>
                                         <th>Price</th>
                                         {% for order in orders %}
-                                        {% if order.status == 'initiated' %}
+                                        
 
 
 
@@ -114,7 +111,7 @@ Cart
 
 
                                         {% endfor %}
-                                        {% endif %}
+                                        
                                         {% endfor %}
                                     </table>
                                 </center>
@@ -126,7 +123,7 @@ Cart
                                     <input type="hidden" value="{{total}}" id="amount" name="amount">
                                     <input type="hidden" value="{{total_id}}" id="ids" name="ids">
                                    
-                                    <button type="submit" class="btn btn-success">Confirm & Pay ${{total}}</button>
+                                    <button type="submit" class="btn btn-success">Order Now: ${{total}}</button>
                                 </form>
                                 <!-- end stipe script  -->
                             </div>
@@ -140,7 +137,7 @@ Cart
         </div>
     </div>
     {% else %}
-    <span class="p-5" style='font-size:20px;'>Your cart is empty &#128532;</span>
+    <span class="p-5" style='font-size:20px;'>Your cart is empty &#128575;</span>
     {% endif %}
 </div>
 

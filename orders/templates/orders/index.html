@@ -10,7 +10,12 @@ Home
     <section id="menu">
         {%csrf_token%}
         {% for item_cat in types %}
-        <h3 style="text-align: center;"><strong>{{item_cat.type}}</strong></h3>
+        <div class="dropdown-divider title mt-5"></div>
+            <h3 class="text-dark"><strong>{{item_cat.type}}{% if item_cat.type == 'Pizzas'%} 🍕{% endif %}{% if item_cat.type == 'Subs'%} 🌭{% endif %}
+                {% if item_cat.type == 'Pasta'%} 🍝{% endif %}{% if item_cat.type == 'Salad'%} 🥗{% endif %}{% if item_cat.type == 'Dinner Platters'%} 🍽️{% endif %}
+                {% if item_cat.type == 'Fritanga'%} 🌮{% endif %}</strong>
+            </h3>
+        <div>
         <div class="row row-cols-1 row-cols-md-3">
             {% for items in inventory %}
             {% if items.item_type == item_cat %}
@@ -25,7 +30,7 @@ Home
                         <a href="#" data-toggle="modal" data-target="#modal{{ items.id }}" aria-expanded="true"
                             aria-controls="collapseOne" class="btn btn-dark">Select</a>
                         {% if items.special %} <div class="ribbon-wrapper-green">
-                            <div class="ribbon-green">DEAL</div>
+                            <div class="ribbon-green">SPECIAL</div>
                         </div>
                         {% endif %}
                     </div>

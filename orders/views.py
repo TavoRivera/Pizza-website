@@ -120,6 +120,15 @@ def cart(request):
     }
     return render(request, 'orders/cart.html', context)
 
+def delete_item(request):
+    item_id = request.POST["item_id"]  
+    Orderr.objects.get(pk=item_id).delete()
+        
+        
+        
+    # after delete redirect to previous page
+    return HttpResponseRedirect('cart')
+
 
 def logout_view(request):
     logout(request)
