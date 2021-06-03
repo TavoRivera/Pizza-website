@@ -107,6 +107,6 @@ class Orderr(models.Model):
             for topp in self.item_topping.all():
                 t.append(topp)
             if len(t) == 0: 
-                return f"{each} - Total price: ${self.amount}"  
+                return f"{self.qty} {each} - Total price: ${self.amount}"  
             else:
-                return f"{each} - Total price: ${self.amount} - {t}"
+                return f"{self.qty} {each} - Total price: ${self.amount} - {t}"
