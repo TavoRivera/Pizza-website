@@ -118,10 +118,10 @@ Cart
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <form action="{% url 'orders' %}" method="post">
+                                <form action="{% url 'my_orders' %}" method="post">
                                     {% csrf_token %}
                                     <input type="hidden" value="{{total}}" id="amount" name="amount">
-                                    <input type="hidden" value="{{total_id}}" id="ids" name="ids">
+                                    <input type="hidden" value="{{total_id}}">
                                    
                                     <button type="submit" class="btn btn-success">Order Now: ${{total}}</button>
                                 </form>

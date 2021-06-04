@@ -25,33 +25,6 @@ def index(request):
     }
     return render(request, "orders/index.html", context)
 
-# def addItem_view(request):
-#     try:
-#         item_id = request.POST['item-id']
-#     except:
-#         item_id = None
-#     try:
-#         max_topping = request.POST['max_topping']
-#     except:
-#         None
-#     try:
-#         size = request.POST['size-select']
-#     except:
-#         size = None
-
-#     toppings = []
-#     if max_topping:
-#         for i in max_topping:
-#             try:
-#                 top = request.POST[f'select-{i}']
-#                 toppings.append(Topping.objects.get(pk=top))
-#             except:
-#                 pass
-#     item = Inventory.objects.get(pk=item_id)
-
-#     cart = Orderr.objects.get(user=request.user)
-#     cart_item = Orderr(order_id=cart, item=item)
-
 
 def add_to_cart(request):
     if request.method == 'POST':
@@ -65,7 +38,7 @@ def add_to_cart(request):
 
         number_of_toppings = int(len(topp))
         to_cart = Orderr.objects.create(
-            qty=cantidad, status='Initiated', amount=price, user_id=request.user.id)
+            qty=cantidad, amount=price, user_id=request.user.id)
 
         # verifica si el item es personalizable
         if item.customizable is True:
@@ -106,10 +79,9 @@ def cart(request):
         
     total_id = []
     for order in orders:
-        if order.status == 'Initiated':
-            total_id.append(order.id)
-            cart_item_count = len(total_id)
-            total += Decimal(order.amount)
+        total_id.append(order.id)
+        cart_item_count = len(total_id)
+        total += Decimal(order.amount)
     context = {
         "inventory": Inventory.objects.all(),
         "itemcost": ItemCost.objects.all(),
@@ -122,13 +94,23 @@ def cart(request):
 
 def delete_item(request):
     item_id = request.POST["item_id"]  
-    Orderr.objects.get(pk=item_id).delete()
-        
-        
-        
+    Orderr.objects.get(pk=item_id).delete()            
     # after delete redirect to previous page
     return HttpResponseRedirect('cart')
 
+
+def my_orders(request):
+    carrito =  Orderr.objects.filter(user_id=request.user.id)
+    for item in carrito:
+        item.id.delete()
+    create_order_id = Completed_Order_Ids.objects.create(order_id=carrito, user=request.user.id, total=request.POST.get("amount"))
+    # create_order_id.save()   
+    #carrito.delete()
+    context = {
+        'order_view' : Completed_Order_Ids.objects.all()
+    }
+
+    return render(request, 'orders/orders.html', context, {"message_success":"Thanks for your order!"})
 
 def logout_view(request):
     logout(request)

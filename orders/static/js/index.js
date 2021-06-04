@@ -1,11 +1,3 @@
-function deleteFromCart(id) {
-    const request = new XMLHttpRequest();
-    request.open('POST', '/delete/');
-}
-
-
-
-
 function qtyAdd(el) {
     qty = document.querySelector("#" + el)
     if (qty.value == 10) {
@@ -29,10 +21,3 @@ function qtySub(el) {
     qty.value = --qty.value
 }
 
-$(function() {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-$(document).ready(function() {
-    $('li.active').removeClass('active');
-    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
-});

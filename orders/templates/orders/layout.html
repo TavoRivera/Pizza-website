@@ -27,11 +27,9 @@
         <ul class="navbar-nav ml-auto lista">
             {% if user.username %}
             <li class="nav-item active"><a class="nav-link" href="{% url 'index' %}"><span><b>Menu</b></span></a></li>
-            <li class="nav-item active"><a class="nav-link" href=""><span><b>Hours</b></span></a></li>
-            <li class="nav-item active"><a class="nav-link" href=""><span><b>Silician vs Regular</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href="#contact"><span><b>Contact Us</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href="{% url 'cart' %}"><span><b>Cart</b></span></a></li>
-            <li class="nav-item active"><a class="nav-link" href="{% url 'orders' %}"><span><b>My Orders</b></span></a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'my_orders' %}"><span><b>My Orders</b></span></a></li>
             <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}"><span><b>Logout</b></span> </a></li>
 
             {% else %}

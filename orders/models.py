@@ -70,33 +70,20 @@ class ToppingCount(models.Model):
             return f"topping: {self.count} - {each} - price: {self.amount}"
 
 
-class Completed_Order_Ids(models.Model):
-    order_id = models.CharField(max_length=64)
-
-    def __str__(self):
-        return f"{self.order_id}"
 
 # models for orders
 
 
 class Orderr(models.Model):
-    STATUS = [
-        ('Initiated', 'Initiated'),
-        ('Completed', 'Completed'),
-        ('Refunded', 'Refunded')
-    ]
+    
     qty = models.IntegerField()
     item = models.ManyToManyField(ItemCost, blank=True, related_name="item")
     item_topping = models.ManyToManyField(
         Topping, blank=True, related_name="item_topping")
-    order_id = models.ForeignKey(
-        Completed_Order_Ids, on_delete=models.PROTECT, null=True)
-    status = models.CharField(
-        max_length=64, choices=STATUS, default='Initiated')
     amount = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+   
 
     class Meta:
         get_latest_by = ['item']
@@ -110,3 +97,18 @@ class Orderr(models.Model):
                 return f"{self.qty} {each} - Total price: ${self.amount}"  
             else:
                 return f"{self.qty} {each} - Total price: ${self.amount} - {t}"
+
+class Completed_Order_Ids(models.Model):
+    order_id = models.CharField(max_length=64)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+    STATUS = [
+        ('Initiated', 'Initiated'),
+        ('Completed', 'Completed'),
+        ('Refunded', 'Refunded')
+    ]
+    status = models.CharField(
+        max_length=64, choices=STATUS, default='Initiated')
+
+    def __str__(self):
+        return f"{self.pk} - {self.order_id} - {self.status}"
