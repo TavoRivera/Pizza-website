@@ -99,9 +99,10 @@ class Orderr(models.Model):
                 return f"{self.qty} {each} - Total price: ${self.amount} - {t}"
 
 class Completed_Order_Ids(models.Model):
-    order_id = models.CharField(max_length=64)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+    item = models.CharField(max_length=500, blank=True)
+    toppings = models.CharField(max_length=500, blank=True)
     STATUS = [
         ('Initiated', 'Initiated'),
         ('Completed', 'Completed'),
@@ -111,4 +112,4 @@ class Completed_Order_Ids(models.Model):
         max_length=64, choices=STATUS, default='Initiated')
 
     def __str__(self):
-        return f"{self.pk} - {self.order_id} - {self.status}"
+        return f"{self.pk} - {self.status}"

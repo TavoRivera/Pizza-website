@@ -99,18 +99,26 @@ def delete_item(request):
     return HttpResponseRedirect('cart')
 
 
-def my_orders(request):
-    carrito =  Orderr.objects.filter(user_id=request.user.id)
-    for item in carrito:
-        item.id.delete()
-    create_order_id = Completed_Order_Ids.objects.create(order_id=carrito, user=request.user.id, total=request.POST.get("amount"))
-    # create_order_id.save()   
-    #carrito.delete()
-    context = {
-        'order_view' : Completed_Order_Ids.objects.all()
-    }
+def confirm_order(request):
+    total=request.POST.get("amount")
+    order =  Orderr.objects.get(user_id=request.user.id)
+    print(total)
 
-    return render(request, 'orders/orders.html', context, {"message_success":"Thanks for your order!"})
+    # item = order.item.get()
+    #busc como mover los datos de una tabla a otra maldito para mañamna
+    
+    # create_order_id = Completed_Order_Ids.objects.create(user_id=request.user.id, total=total)
+    # create_order_id.save()   
+    order.delete()
+
+    messages.success(request, f'Thanks for your order!')
+    return HttpResponseRedirect(reverse('index'))
+
+def my_orders(request):
+    context = {
+        'order_view' : "Estas son mis ordenes",
+    }
+    return render(request, "orders/orders.html", context)
 
 def logout_view(request):
     logout(request)
@@ -177,7 +185,3 @@ def login_view(request):
         login(request, user)
         # render(request, "orders/index.html", {"message_success": "Welcome!"})
         return HttpResponseRedirect(reverse('index'))
-
-
-def my_orders(request):
-    return render(request, 'orders/orders.html')

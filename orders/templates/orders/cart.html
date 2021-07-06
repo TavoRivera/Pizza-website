@@ -28,11 +28,15 @@ Cart
                     </thead>
                     <tbody>
                         {% for order in orders %}
-                       
+
                         {% for item in order.item.all %}
                         <tr>
-                            <th scope="row">{{item}}{% if order.item_topping.all %}<small><small>+ {% for topping in order.item_topping.all %} {{topping}} {% if not forloop.last %}, {% endif %}
-                                    {% endfor %}</small></small>{% endif %}</th>
+                            <th scope="row">{{item}}
+                                {% if order.item_topping.all %}<small><small>+
+                                        {% for topping in order.item_topping.all%}
+                                        {{topping}}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </small></small>{% endif %}</th>
                             <td>{{order.qty}}</td>
                             <td>${{order.amount}}</td>
                             <td>
@@ -43,11 +47,11 @@ Cart
                                 </form>
                             </td>
                         </tr>
-                        
+
 
 
                         {% endfor %}
-                  
+
                         {% endfor %}
                         <tr>
                             <td></td>
@@ -88,7 +92,7 @@ Cart
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         {% for order in orders %}
-                                        
+
 
 
 
@@ -111,27 +115,25 @@ Cart
 
 
                                         {% endfor %}
-                                        
+
                                         {% endfor %}
                                     </table>
                                 </center>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <form action="{% url 'my_orders' %}" method="post">
+                                <form action="{% url 'confirm_order' %}" method="post">
                                     {% csrf_token %}
                                     <input type="hidden" value="{{total}}" id="amount" name="amount">
-                                    <input type="hidden" value="{{total_id}}">
-                                   
+
                                     <button type="submit" class="btn btn-success">Order Now: ${{total}}</button>
                                 </form>
-                                <!-- end stipe script  -->
                             </div>
                         </div>
                     </div>
                 </div>
 
-               
+
             </span>
 
         </div>
