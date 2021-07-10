@@ -94,15 +94,14 @@ class Orderr(models.Model):
             for topp in self.item_topping.all():
                 t.append(topp)
             if len(t) == 0: 
-                return f"{self.qty} {each} - Total price: ${self.amount}"  
+                return f"{self.qty} {each} - Price of this request: ${self.amount}"  
             else:
-                return f"{self.qty} {each} - Total price: ${self.amount} - {t}"
+                return f"{self.qty} {each} - Price of this request: ${self.amount} - {t}"
 
-class Completed_Order_Ids(models.Model):
+class Completed_Orders(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
-    item = models.CharField(max_length=500, blank=True)
-    toppings = models.CharField(max_length=500, blank=True)
+    order_detail = models.CharField(max_length=800, blank=False)
     STATUS = [
         ('Initiated', 'Initiated'),
         ('Completed', 'Completed'),
@@ -110,6 +109,7 @@ class Completed_Order_Ids(models.Model):
     ]
     status = models.CharField(
         max_length=64, choices=STATUS, default='Initiated')
+    date = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return f"{self.pk} - {self.status}"

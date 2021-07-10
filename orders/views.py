@@ -1,3 +1,4 @@
+import re
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -73,9 +74,10 @@ def add_to_cart(request):
 
 
 def cart(request):
-    orders =  Orderr.objects.filter(user_id=request.user.id)
+    # get each item with the price and qty for user
+    orders =  Orderr.objects.filter(user_id=request.user.id) 
     total = Decimal(0)
-    cart_item_count = 0
+    cart_item_count = 0 # increase if the cart is not empty
         
     total_id = []
     for order in orders:
@@ -101,24 +103,34 @@ def delete_item(request):
 
 def confirm_order(request):
     total=request.POST.get("amount")
-    order =  Orderr.objects.get(user_id=request.user.id)
+    order =  Orderr.objects.filter(user_id=request.user.id)
     print(total)
-
-    # item = order.item.get()
-    #busc como mover los datos de una tabla a otra maldito para mañamna
+    orderstr = str(order)
+    orderstr = orderstr[9:len(orderstr)]
     
-    # create_order_id = Completed_Order_Ids.objects.create(user_id=request.user.id, total=total)
-    # create_order_id.save()   
+    create_order_id = Completed_Orders.objects.create(user_id=request.user.id, total=total, order_detail=orderstr)
+    create_order_id.save()   
     order.delete()
 
     messages.success(request, f'Thanks for your order!')
     return HttpResponseRedirect(reverse('index'))
 
 def my_orders(request):
+    gen_order = Completed_Orders.objects.filter(user_id=request.user.id)
     context = {
-        'order_view' : "Estas son mis ordenes",
+        "orders": gen_order,
+        "admin_orders": Completed_Orders.objects.all()
     }
     return render(request, "orders/orders.html", context)
+
+def check_order(request):
+    if request.POST["completed"]:
+        completed = request.POST["completed"]
+        row = Completed_Orders.objects.get(pk=completed)
+        row.status = 'Completed'
+        row.save()
+
+    return HttpResponseRedirect(reverse('my_orders'))
 
 def logout_view(request):
     logout(request)
