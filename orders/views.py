@@ -119,7 +119,7 @@ def my_orders(request):
     gen_order = Completed_Orders.objects.filter(user_id=request.user.id)
     context = {
         "orders": gen_order,
-        "admin_orders": Completed_Orders.objects.all()
+        "admin_orders": Completed_Orders.objects.filter(status ="Initiated")
     }
     return render(request, "orders/orders.html", context)
 

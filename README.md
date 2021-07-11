@@ -22,4 +22,6 @@ Para que desde la base de datos mostrara las imagenes que se pueden subir, en se
 
 En la parte de frontend se ha utilizado bootstrap para hacer las animaciones con el modal y un poco de js para habilitar y deshabilitar los checkbox para que un usuario no pueda seleccionar mas de tres toppings (porque hasta 3 muestra el menú de PinocchiosPizza). Además de establecer un limite en los pedidos que no exceda a mas de 10 de cada producto, mostrando ua notificacion al usuario.
 
-En views quizás lo mas interesante sea add_to_cart, que del modal del menú extrae la informacion de la solicitud que hicimos y de acuerdo al tamaño del platillo seleccionado, ubica el precio de este, si se agrega toppings, cuenta la cantidad de toppings agregados, eso si el producto es personalizable, y de acuerdo a la cantidad de toppings ubica el precio, ya que el precio de la pizza aumenta si se seleccionan uno o mas toppings. Finalmete con la cantidad y el precio del producto se calcula el total y se almacena en la tabla Orderr, agregandose al carrito.
+En views las rutas más destacadas son add_to_cart, que según la solicitud realizada ubica el precio del platillo o los platillos, y ya con los precios definidos, la cantidad y los toppings agregados (si acaso los hay) se almacenará en la tabla Orderr, los datos se almacenarán de acuerdo a cada usuario, por lo cual, cuando un usuario visite a su carrito, solo podrá ver sus solicitudes, esto lo hace la función cart.
+
+Luego, con la función delete_item() será posible eliminar un articulo del carrito según el usuario.

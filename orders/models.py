@@ -105,7 +105,6 @@ class Completed_Orders(models.Model):
     STATUS = [
         ('Initiated', 'Initiated'),
         ('Completed', 'Completed'),
-        ('Refunded', 'Refunded')
     ]
     status = models.CharField(
         max_length=64, choices=STATUS, default='Initiated')
