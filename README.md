@@ -25,3 +25,9 @@ En la parte de frontend se ha utilizado bootstrap para hacer las animaciones con
 En views las rutas más destacadas son add_to_cart, que según la solicitud realizada ubica el precio del platillo o los platillos, y ya con los precios definidos, la cantidad y los toppings agregados (si acaso los hay) se almacenará en la tabla Orderr, los datos se almacenarán de acuerdo a cada usuario, por lo cual, cuando un usuario visite a su carrito, solo podrá ver sus solicitudes, esto lo hace la función cart.
 
 Luego, con la función delete_item() será posible eliminar un articulo del carrito según el usuario.
+
+Posteriormente el usuario podrá confirmar su pedido en confirm_order(), donde los datos de la orden se almacenarán en otra tabla llamada completed_orders, y al confirmar ese pedido se eliminarán esos artículos del carrito de compras.
+
+El usuario podrá visualizar sus pedidos en la página My Orders (únicamentesus pedidos y no el de otra persona), y podrá ver su estado, si se ha iniciado la orden o si se ha completado.
+
+Como toque personal, se ha implementado que para el administrador de la página, en la misma página de my orders, si el usuario es staff pueda marcar como completadas las órdenes de cualquier usuario y que se oculten las órdenes una vez se marquen como completadas.
