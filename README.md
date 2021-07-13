@@ -16,7 +16,7 @@ En la pagina de inicio se muestra el menú. Para la elaboracion de este menú se
 - ItemCost: Establece los precios para todas las ordenes segun su tamaño
 - ToppingCount: Para las pizzas con toppings, almacea el precio para las pizzas que tienen uno, dos hasta tres toppings.
 - Orderr: Funciona para el carrito, donde todos los items que enviamos desde el menú los almacena por cantidad, el precio de cad item, el precio total y el usuario específico que está haciendo las peticiones.
-- Completed_Order_Ids: Una vez se genere la orden desde cart, esta tabla almacenará informacion de la solicitud del usuario, su nombre y el monto total, y un campo que dice Iniciado, Rechazado y Completado para que el admin de la pagina pueda confirmar su pedido.
+- Completed_Orders: Una vez se genere la orden desde cart, esta tabla almacenará informacion de la solicitud del usuario, su nombre, detalles del pedido, el monto total, y un campo que dice Iniciado o Completado para que el admin de la pagina pueda confirmar su pedido.
 
 Para que desde la base de datos mostrara las imagenes que se pueden subir, en settings en la parte de static se han agregado un par de lineas para que estas imagenes pudieran cargar.
 
