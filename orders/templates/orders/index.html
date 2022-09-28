@@ -24,7 +24,7 @@ Home
                 {% for items in inventory %}
                 {% if items.item_type == item_cat %}
                 <div class="col-md-6 col-lg-4 col-sm-12 col-xs-12 mt-4">
-                    <div class="card">{% load staticfiles %}
+                    <div class="card">
                         <img src=" {{items.image}}" class="card-img-top" height="250" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><small><b>{{ items.name }}</b></small></h5>

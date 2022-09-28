@@ -13,6 +13,7 @@ My Orders
                             my-custom-scrollbar" style="display: flex; flex-direction: column-reverse;">
 
             <table class="table table-bordered table-striped mb-0">
+                {% if orders%}
                 <thead>
                     <tr>
                         <th scope="col"># Order</th>
@@ -21,6 +22,9 @@ My Orders
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
+                {%else%}
+                <h3 class="text-center">You don't have orders yet</h3>
+                {%endif%}
                 {% if not user.is_staff %}
                 <tbody>
                     {% for order in orders %}
